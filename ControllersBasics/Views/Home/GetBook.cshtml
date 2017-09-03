@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "GetBook";
+}
+
+@* В атрибуте action нужно указать имя метода для обратотки Post запроса, если он не совпадает с именем View *@
+<form method="post" action="PostBook">
+    <p>Введите название книги</p>
+    <input type="text" name="title" />
+    <p>Введите автора</p>
+    <input type="text" name="author" />
+    <input type="submit" value="Отправить"/>
+</form>
+

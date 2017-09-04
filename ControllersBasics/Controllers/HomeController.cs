@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControllersBasics.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,16 @@ namespace ControllersBasics.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult GetHtml()
+        {
+            return new HtmlResult("<h2>Привет, мир!</h2>");
+        }
+
+        public ActionResult GetImage()
+        {
+            return new ImageResult("../Content/Images/winter.jpg");
         }
 
         public string GetId(int id)
@@ -53,12 +64,24 @@ namespace ControllersBasics.Controllers
 
         // Передача параметров: вариант 2
         // Название GetBook уже использовать не получится, так как метод с такой сигнатурой уже есть
+        /*
         [HttpPost]
         public string PostBook()
         {
             string title = Request.Form["title"];
             string author = Request.Form["author"];
             return author + " " + title;
+        }
+        */
+
+        [HttpPost]
+        // ContentResult унаследован от ActionResult
+        // public ContentResult PostBook()
+        public ActionResult PostBook()
+        {
+            string title = Request.Form["title"];
+            string author = Request.Form["author"];
+            return Content(author + " " + title);
         }
 
         public ActionResult About()

@@ -9,8 +9,23 @@ namespace ControllersBasics.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        // ViewResult унаследован от ActionResult
+        // public ActionResult Index()
+        public ViewResult Index()
         {
+            // Если запускать View без параметров, нужный View ищется по названию
+            // return View(); // new ViewResult
+            // При желании, можно указать нужный View (из папки Home)
+            // return View("About");
+            // или можно указать полный путь к представлению
+            // return View("~/Views/Some/Index.cshtml");
+
+            // Передача параметров в представление
+            // Через ViewData
+            ViewData["HeadVD"] = "Привет, мир! ViewData";
+            // Через ViewBag
+            ViewBag.HeadVB = "Привет, мир! ViewBag";
+            ViewBag.Fruit = new List<string> { "яблоки", "груши", "вишни" };
             return View();
         }
 

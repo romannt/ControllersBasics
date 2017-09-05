@@ -192,11 +192,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\GetBook.cshtml" />
     <Content Include="Views\Some\Index.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Book\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

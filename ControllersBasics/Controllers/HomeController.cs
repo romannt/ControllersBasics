@@ -62,6 +62,44 @@ namespace ControllersBasics.Controllers
             return "<h2>Площадь треугольника с основанием " + a + " и высотой " + h + " равна " + s + "</h2>";
         }
 
+        public void GetVoid()
+        {
+        }
+
+        // Демонстрация переадресации
+        public ActionResult Redirect()
+        {
+            // Временная переадресация
+            // return Redirect("/Home/Contact");
+            // Постоянная переадресация
+            // return RedirectPermanent("/Home/Contact");
+            // Переадресация по маршруту
+            // return RedirectToRoute(new { Controller = "Home", Action = "Contact" });
+            // Переадресация на метод из этого контроллера
+            // return RedirectToAction("Contact");
+            // Переадресация на метод из другого контроллера
+            // return RedirectToAction("Index", "Book");
+            // Переадресация с передачей параметров
+            return RedirectToAction("Square", "Home", new { a = 10, h = 12});
+        }
+
+        // Демонстрация возврата статусных кодов
+        public ActionResult Status()
+        {
+            // return new HttpStatusCodeResult(404);
+            // return new HttpNotFoundResult(); // 404
+            return new HttpUnauthorizedResult(); // 401
+        }
+
+        public ActionResult ConditionalRedirect(int id)
+        {
+            if (id > 3)
+            {
+                return Redirect("/Home/Contact");
+            }
+            return View("About");
+        }
+
         [HttpGet]
         public ActionResult GetBook()
         {

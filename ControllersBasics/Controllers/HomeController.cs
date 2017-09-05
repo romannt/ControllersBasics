@@ -14,6 +14,10 @@ namespace ControllersBasics.Controllers
         // public ActionResult Index()
         public ViewResult Index()
         {
+            // Записываем Cookie в браузере клиента
+            HttpContext.Response.Cookies["id"].Value = "ca-4353w";
+            // Устанавливаем значение переменной сессии
+            Session["name"] = "Tom";
             // Если запускать View без параметров, нужный View ищется по названию
             // return View(); // new ViewResult
             // При желании, можно указать нужный View (из папки Home)
@@ -160,7 +164,7 @@ namespace ControllersBasics.Controllers
             // Тип файла - content-type
             // string file_type = "application/pdf";
             // Универсальный content-type - подходит для файла любого типа
-            // string file_type = "application/octet-stream";
+            string file_type = "application/octet-stream";
             // Имя файла - не обязательно
             string file_name = "test.pdf";
             return File(file_path, file_type, file_name);
@@ -188,6 +192,32 @@ namespace ControllersBasics.Controllers
             return File(fs, file_type, file_name);
         }
 
+        public string GetContext()
+        {
+            // Глобальный объект Response и свойство HttpContext.Response ссылаются на один и тот же объект
+            // HttpContext.Response.Write("Привет, мир!");
+            Response.Write("Привет, мир!");
+            // string browser = HttpContext.Request.Browser.Browser;
+            // Глобальный объект Request и свойство HttpContext.Request ссылаются на один и тот же объект
+            string browser = Request.Browser.Browser;
+            string userAgent = HttpContext.Request.UserAgent;
+            string url = HttpContext.Request.RawUrl;
+            string ip = HttpContext.Request.UserHostAddress;
+            string referer = HttpContext.Request.UrlReferrer == null ? "" : HttpContext.Request.UrlReferrer.AbsoluteUri;
+            string cookieVarId = HttpContext.Request.Cookies["id"].Value;
+            string sessionVarName = Session["name"] == null ? "" : Session["name"].ToString();
+            // Чтобы удалить переменную сессии нужно присвоить ей null
+            Session["name"] = null;
+            return String.Format(
+                $"<p>Browser: {browser}</p>" +
+                $"<p>User-Agent: {userAgent}</p>" +
+                $"<p>URL: {url}</p>" +
+                $"<p>IP: {ip}</p>" +
+                $"<p>Referer: {referer}</p>" +
+                $"<p>Cookie var id: {cookieVarId}</p>" +
+                $"<p>Session var Name: {sessionVarName}</p>"
+            );
+        }
     }
 }
  

@@ -1,6 +1,7 @@
 ﻿using ControllersBasics.Util;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -150,6 +151,43 @@ namespace ControllersBasics.Controllers
 
             return View();
         }
+
+        // Отправляет файл клиенту (браузер загружает файл)
+        public ActionResult GetFile()
+        {
+            // Путь к файлу
+            string file_path = Server.MapPath("~/Files/test.pdf");
+            // Тип файла - content-type
+            // string file_type = "application/pdf";
+            // Универсальный content-type - подходит для файла любого типа
+            // string file_type = "application/octet-stream";
+            // Имя файла - не обязательно
+            string file_name = "test.pdf";
+            return File(file_path, file_type, file_name);
+        }
+
+        // Отправляет файл клиенту (браузер загружает файл)
+        public ActionResult GetBytes()
+        {
+            // Путь к файлу
+            string file_path = Server.MapPath("~/Files/test.pdf");
+            byte[] buffer = System.IO.File.ReadAllBytes(file_path);
+            string file_type = "application/pdf";
+            string file_name = "test.pdf";
+            return File(buffer, file_type, file_name);
+        }
+
+        // Отправляет файл клиенту (браузер загружает файл)
+        public ActionResult GetStream()
+        {
+            // Путь к файлу
+            string file_path = Server.MapPath("~/Files/test.pdf");
+            FileStream fs = new FileStream(file_path, FileMode.Open);
+            string file_type = "application/pdf";
+            string file_name = "test.pdf";
+            return File(fs, file_type, file_name);
+        }
+
     }
 }
  
